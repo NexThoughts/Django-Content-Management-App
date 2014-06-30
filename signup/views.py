@@ -1,7 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
-from forms import Signup, Confirm
+from forms import Signup
 # Create your views here.
 def register(request):
     if request.method == "POST":

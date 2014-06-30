@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href=" {% static "assets/css/default.css" %}">
+   <!-- <link rel="stylesheet" type="text/css" href=" {% static "assets/css/bootstrap-theme.min.css" %}">
+    <link rel="stylesheet" type="text/css" href=" {% static "assets/css/bootstrap-theme.css" %}">
+    --> <link rel="stylesheet" type="text/css" href=" {% static "assets/css/bootstrap.css" %}">
+
+</head>
+<body>
+<div id="header">
+    <br><br><h1 style="color:white;">&nbsp;&nbsp;&nbsp;Django Content Viewer</h1><br>
+    <div id="mainlog">
+
+    </div>
+</div>
+<div id="content">
+    <div id="window">
+    <br><br><br><br><br><br>
+    {% block content %}
+        <center>
+        <br>Register with us:<br>
+        <a href="/accounts/register/" class="btn btn-primary btn-lg" role="button">Register</a>
+        <br><br><h2>OR</h2>
+        <br>Login if already a member<br>
+        <a href="/accounts/login/" class="btn btn-primary btn-lg" role="button">Login</a>
+        </center>
+    {% endblock %}
+    <br><br><br><br><br><br>
+    </div>
+</div>
+<div id="footer">
+
+
+</div>
+</body>
+</html>
