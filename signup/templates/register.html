@@ -2,10 +2,13 @@
 {% block content %}
 <h1 align="center"> Register </h1><br><br>
 <form action="/accounts/register/" method="post">{% csrf_token %}
-
+{% if form.errors %}<p>form has errors</p>{% endif %}
     <div  style="margin-left:200px">
         {{ form.as_p }}<br><br>
         <input type="submit" value="Sign Up">
+
+
     </div>
 </form>
+ <p>forgot password? <a href="/password_reset/">click here</a></p>
 {% endblock %}

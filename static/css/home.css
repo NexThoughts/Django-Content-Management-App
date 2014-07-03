@@ -1,0 +1,16 @@
+#leftpane{
+float:left;
+position: fixed;
+background-color:blue;
+margin: auto;
+}
+
+#centerpane{
+position:relative;
+margin: auto;
+}
+
+#rightpane{
+position:right;
+margin: auto;
+}
