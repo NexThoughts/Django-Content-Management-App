@@ -95,12 +95,17 @@ TEMPLATE_DIRS= [
     os.path.join(BASE_DIR, os.path.join('signup', 'templates')),
     os.path.join(BASE_DIR, 'templates'),
     os.path.join(BASE_DIR, os.path.join('signin', 'templates')),
-
+    os.path.join(BASE_DIR, os.path.join('home', 'templates')),
+    os.path.join(BASE_DIR, os.path.join('article', 'templates')),
 
 ]
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'abhilashjha@gmail.com'
-EMAIL_HOST_PASSWORD = 'W@yneRooney'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 465
+
+LOGIN_URL = '/accounts/login/'
+
+LOGIN_REDIRECTED_URL = '/home/'
