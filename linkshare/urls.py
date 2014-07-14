@@ -24,4 +24,12 @@ urlpatterns = [
     url(r'^home/$', 'home.views.homepage'),
     url(r'^logout/$', 'signin.views.LogoutRequest'),
 
+    url(r'^article/add/','article.views.UploadArticle'),
+    url(r'^articles/all/','article.views.articles'),
+    url(r'^articles/get/(?P<article_id>\d+)/$', 'article.views.article'),
+    url(r'^view/group/$', 'home.views.grp'),
+    url(r'^view/group/all','home.views.groupall'),
+    url(r'^view/get/(?P<join>[0-9A-Za-z_\-]+)/$',
+        'home.views.GetGroup'),
+
 ]

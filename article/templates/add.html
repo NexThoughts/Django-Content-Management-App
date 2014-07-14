@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'index.html' %}
+{% block content %}
+<form name="addarticle" action="" method="POST">{% csrf_token %}
+    <ul style="list-style:None;">
+        <li>{{ form.Title }}</li>
+        <li>{{ form.Body }}</li>
+    </ul>
+    <input type="submit">
+</form>
+{% endblock %}

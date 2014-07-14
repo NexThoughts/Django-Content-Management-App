@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block content %}
+
+        {% for i in check %}
+
+        <ul>
+        <li><a name="join" href=/view/get/{{ i.id }} >{{ i }}</a></li>
+        </ul>
+
+        {% endfor %}
+
+{% endblock %}
