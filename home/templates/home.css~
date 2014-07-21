@@ -29,41 +29,22 @@ overflow:hidden;
 #Left-Sidebar{
 min-height:400px;
 background-color: #fff;
-width:150px;
+width:200px;
 float: left;
 border-radius:3px;
-padding:5px;
 }
 
 #Right-Sidebar{
 min-height: 400px;
 background-color: #fff;
-width:100px;
+width:200px;
 float:right;
-border-radius:3px;
-padding: 5px;
 }
 
 #content{
 min-height:400px;
 background-color: #fff;
-margin-left:154px;
-margin-right:104px;
-border-radius:3px;
-padding: 5px;
-}
+margin-left:204px;
+margin-right:204px;
 
-#cont_grp{
-min-height: 30px;
-background-color: #ddd;
-margin:4px;
-padding:4px;
-border-radius: 3px;
-}
-
-#art_cont{
-background-color: #ccf;
-padding: 5px;
-border-radius: 3px;
-margin: 5px;
 }

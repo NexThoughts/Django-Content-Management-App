@@ -31,5 +31,7 @@ urlpatterns = [
     url(r'^view/group/all','home.views.groupall'),
     url(r'^view/get/(?P<join>[0-9A-Za-z_\-]+)/$',
         'home.views.GetGroup'),
-    url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/$', 'article.views.ShowGroup')
+    url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/$', 'article.views.ShowGroup'),
+    url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/unjoin/$', 'home.views.DeleteGroup'),
+    url(r'view/group/(?P<grp>[0-9A-Za-z_\-]+)/remove_article/(?P<art_id>[0-9A-Za-z_\-]+)', 'article.views.rem_art')
 ]

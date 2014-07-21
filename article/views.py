@@ -1,8 +1,8 @@
 from django.shortcuts import render, render_to_response
-from forms import AddArticle
+from forms import AddArticle,AddComments
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
-from article.models import Article
+from article.models import Article,Comments
 from django.contrib.auth.models import User,Group
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -24,6 +24,19 @@ def UploadArticle(request, grp):
     return render_to_response('add.html', args)
 
 def article(request, article_id=1):
+    if request.POSTd:
+        form = AddComments(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return HttpResponseRedirect('/articles/all')
+        else:
+            form = AddComments()
+
+    args = {}
+    args.update(csrf(request))
+    args['form']=AddComments()
+
     return render_to_response('view.html',{'article': Article.objects.get(id=article_id)})
 
 def articles(request, grp):

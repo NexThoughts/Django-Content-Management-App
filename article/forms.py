@@ -1,5 +1,5 @@
 from django import forms
-from models import Article
+from models import Article, Comments
 
 class AddArticle(forms.ModelForm):
 
@@ -12,3 +12,10 @@ class AddArticle(forms.ModelForm):
     class Meta:
         model = Article
         fields = ('Title', 'Body', 'Link','File','group_id','Author_id')
+
+class AddComments(forms.ModelForm):
+    Comment = forms.CharField(required=True)
+
+    class Meta:
+        model = Comments
+        fields = ('Comment',)

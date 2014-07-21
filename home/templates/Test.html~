@@ -1,0 +1,59 @@
+<html>
+<head>
+<Title>
+Welcome
+</Title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="Text/CSS" href="home.css">
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="Container-fluid">
+			<button type="button" class="navbar-toggle" data-toggle= "collapse" data-target=".navHeaderCollapse">
+				<span class= "icon-bar"></span>
+				<span class= "icon-bar"></span>
+				 <span class= "icon-bar"></span>
+				
+		</button>
+		<a href="127.0.0.1:8000" class="navbar-brand">Django Content Management App</a> 
+		<div class="navbar-text">powered by</div>
+		<a href="http://www.nexthoughts.com" class="navbar-text">Nexthoughts</a>
+		
+
+		<div class="collapse navbar-collapse navHeaderCollapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Join Group</a></li>
+				<li><a href="#">Posts</a></li>
+				<li><a href="#">Logout</a></li>
+			</ul>
+			
+		</div>
+	</div>
+	
+</div>
+
+<div id="main" style=" margin-top: 5%">
+	
+	<div id="Left-Sidebar">
+	l sidebar
+	</div>
+	
+	
+
+	<div id="Right-Sidebar">
+	r sidebar
+	</div>
+
+	<div id="content">
+	content
+	</div>
+
+	<footer>
+	footer
+	</footer>
+
+</div>
+
+</body>
+</html>

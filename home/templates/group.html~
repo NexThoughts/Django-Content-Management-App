@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block content %}
+
+        {% for i in check %}
+
+        <ul>
+        <li><a href= {{ i }}>{{ i }}</a></li>
+        </ul>
+        {% endfor %}
+        <a href="all">View all groups</a>
+
+{% endblock %}

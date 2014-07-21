@@ -1,20 +1,27 @@
-{% extends 'index.html' %}
-        {% block content %}
+{% extends 'base.html' %}
+    {% block content %}
 
-<div>
-    <div id="leftpane">
+        {% for i in check %}
+            <div style="background-color:eee; margin:4px; min-height:100px; padding: 5px;">
+            <strong>{{ i }}</strong>
+            <a href="/view/group/{{ i }}/add/" class="btn btn-primary btn-xs" style="float:right;">Add a New Article</a><br>
+            {% if articles.count > 0 %}
+                {% for article in articles %}
+                    {% if i = article.group_id %}
+                        {% if user = article.Author_id %}
+                            {{ article.Title }}<br>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                None
+            {% endif %}
 
-    </div>
-    <div id="centerpane">
-        <h1>Center pane</h1>
-        <a href="/view/group">View your Groups</a><br>
-        <a href="/view/yourpost">Your Posts</a><br>
-        <a href="/logout">Log Out</a>
-        <a href="/article/add/">Add Article</a>
-    </div>
-    <div id="rightpane">
+            </div>
 
-    </div>
-</div>
+        {% endfor %}
 
-{% endblock %}
+   {% endblock %}
+    {% block nav %}
+        {{ user.username }}
+    {% endblock %}
