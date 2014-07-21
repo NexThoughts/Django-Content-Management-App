@@ -3,8 +3,24 @@
 <h1>{{ article.Title }}</h1>
 <p>{{ article.Body }}<p>
 <form action="" method="POST">{% csrf_token %}
-    {{ form }}
-    <input type="submit" value="POST">
-
+{{ form.Comment }}<br>
+    <input type="submit" value="Post" class="btn btn-info btn-xs">
 </form>
+<br>
+{% for value in comment reversed %}
+    {% if value.Article_id_id = article.id %}
+    <div id="comment_cont">
+        <b>{{ value.User_id }}</b>
+        {% if value.User_id = user %}
+            <a href="#" class="btn btn-danger btn-xs" style="float:right;">X</a>
+        {% else %}
+            {% if article.Author_id = user %}
+                <a href="#" class="btn btn-danger btn-xs" style="float:right;">X</a>
+            {% endif %}
+        {% endif %}
+        <hr>
+        {{ value }}
+    </div>
+    {% endif %}
+{% endfor %}
 {% endblock %}

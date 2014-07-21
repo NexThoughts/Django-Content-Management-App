@@ -23,27 +23,39 @@ def UploadArticle(request, grp):
     args['form']=AddArticle()
     return render_to_response('add.html', args)
 
-def article(request, article_id=1):
-    if request.POSTd:
+def article(request, grp, article_id=1):
+    if request.POST:
         form = AddComments(request.POST)
         if form.is_valid():
-            form.save()
-
-            return HttpResponseRedirect('/articles/all')
+            verify=form.save(commit=False)
+            verify.User_id = request.user
+            verify.Group_id = Group.objects.get(name=grp)
+            verify.Article_id = Article.objects.get(id=article_id)
+            verify.save()
+            return HttpResponseRedirect('')
         else:
             form = AddComments()
-
-    args = {}
-    args.update(csrf(request))
-    args['form']=AddComments()
-
-    return render_to_response('view.html',{'article': Article.objects.get(id=article_id)})
+    else:
+        args = {}
+        args.update(csrf(request))
+        args['form']=AddComments()
+        args['article']= Article.objects.get(id=article_id)
+        args['comment']= Comments.objects.all()
+        args['user']=request.user
+        return render_to_response('view.html', args)
 
 def articles(request, grp):
     return render_to_response('articles.html', { 'articles' : Article.objects.all(), 'grp':grp })
+
+
 
 @login_required()
 def ShowGroup(request, grp, article_id=1):
     parameter = request.user.id
     g=Group.objects.get(name=grp).id
     return render_to_response('MyGroup.html', {'parameter': parameter, 'articles': Article.objects.all(), 'grp':g })
+
+def rem_art(request, art_id, grp):
+    r=Article.objects.all(id=art_id)
+    r.delete()
+    return HttpResponseRedirect("/home/")

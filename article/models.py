@@ -16,9 +16,9 @@ class Article(models.Model):
 
 class Comments(models.Model):
     User_id = models.ForeignKey(User)
-    Comment = models.CharField(max_length=200)
+    Comment = models.TextField(max_length=200)
     Group_id = models.ForeignKey(Group)
     Article_id = models.ForeignKey(Article)
 
     def __unicode__(self):
-        return self.Article_id
+        return self.Comment

@@ -1,6 +1,14 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views
+from dajaxice.core import dajaxice_autodiscover
+from django.conf import settings
+
+dajaxice_autodiscover()
+
+
+
+
 urlpatterns = [
     # Examples:
     url(r'^$', 'linkshare.views.home', name='home'),
@@ -8,7 +16,14 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^accounts/register/$', 'signup.views.register'),
+
+    #dajax
+
+
+
     #url()
+
+
     url(r'^accounts/register/$', 'signup.views.register_check'),
     url(r'^accounts/register_success/$', 'signup.views.register_success'),
 
@@ -26,7 +41,7 @@ urlpatterns = [
 
     url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/add/','article.views.UploadArticle'),
     url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/all/','article.views.articles'),
-    url(r'^articles/get/(?P<article_id>\d+)/$', 'article.views.article'),
+    url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/show/(?P<article_id>[0-9A-Za-z_\-]+)/$', 'article.views.article'),
     url(r'^view/group/$', 'home.views.grp'),
     url(r'^view/group/all','home.views.groupall'),
     url(r'^view/get/(?P<join>[0-9A-Za-z_\-]+)/$',

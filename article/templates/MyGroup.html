@@ -10,7 +10,7 @@
          {% if article.group_id_id = grp %}
 <div id="art_cont">
     <a href="/view/group/{{ article.group_id }}/remove_article/{{ article.id }}" class="btn btn-danger btn-xs" style="float:right;">X</a>
-    <font size="6"><a href="/articles/get/{{ article.id }}/">{{ article.Title }}</a></font>
+    <font size="6"><a href="/view/group/{{ article.group_id }}/show/{{ article.id }}/">{{ article.Title }}</a></font>
     <hr>
     <p>{{ article.Body|upper|truncatewords:"10" }}</p><!-- filters -->
     <p>{{ article.Link }}</p>

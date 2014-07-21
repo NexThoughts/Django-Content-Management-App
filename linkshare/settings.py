@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'signup',
     'article',
     'home',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,3 +112,5 @@ EMAIL_PORT = 465
 LOGIN_URL = '/accounts/login/'
 
 LOGIN_REDIRECTED_URL = '/home/'
+
+

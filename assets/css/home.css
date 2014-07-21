@@ -63,5 +63,14 @@ border-radius: 3px;
 
 #art_cont{
 background-color: #ccf;
-padding:5px;
+padding: 5px;
+border-radius: 3px;
+margin: 5px;
+}
+
+#comment_cont{
+background-color: #ccf;
+padding: 5px;
+border-radius: 3px;
+margin: 5px;
 }

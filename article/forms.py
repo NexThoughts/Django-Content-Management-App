@@ -1,6 +1,6 @@
 from django import forms
 from models import Article, Comments
-
+from django.forms import Textarea
 class AddArticle(forms.ModelForm):
 
 
@@ -14,8 +14,9 @@ class AddArticle(forms.ModelForm):
         fields = ('Title', 'Body', 'Link','File','group_id','Author_id')
 
 class AddComments(forms.ModelForm):
-    Comment = forms.CharField(required=True)
-
     class Meta:
         model = Comments
         fields = ('Comment',)
+        widgets = {
+          'Comment': forms.Textarea(attrs={'rows':2, 'cols':30,'placeholder': "Add a Comment"}),
+        }
