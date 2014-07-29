@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ article.Title }}</h1>
+<h1>{{ article.Title }}<a href="edit" class="btn btn-info btn-xs" style="float:right;">Edit</a></h1>
 <p>{{ article.Body }}<p>
+{% if article.File != '' %}
+<img src="{{ article.File.url }}" alt="Cannot display image" height="40%" width="40%">
+    <br><br>Download File:
+    <a href="{{ article.File.url }}" class="btn btn-xs" style="background-color:#009">Save</a>
+    {% endif %}
 <form action="" method="POST">{% csrf_token %}
 {{ form.Comment }}<br>
     <input type="submit" value="Post" class="btn btn-info btn-xs">
@@ -10,9 +15,10 @@
 {% for value in comment reversed %}
     {% if value.Article_id_id = article.id %}
     <div id="comment_cont">
-        <b>{{ value.User_id }}</b>
+        <b>{{ value.User_id }}, {{ value.com_date }}</b>
+
         {% if value.User_id = user %}
-            <a href="#" class="btn btn-danger btn-xs" style="float:right;">X</a>
+            <a href="#" class="btn btn-danger btn-xs" style="float:right;">x</a>
         {% else %}
             {% if article.Author_id = user %}
                 <a href="#" class="btn btn-danger btn-xs" style="float:right;">X</a>

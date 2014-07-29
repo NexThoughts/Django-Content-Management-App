@@ -17,8 +17,8 @@ def login_chk(request):
     if request.method=='POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.POST.get('username','')
-            password = request.POST.get('password','')
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
             user = auth.authenticate(username=username, password=password)
 
             if user is not None:

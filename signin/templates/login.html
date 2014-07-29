@@ -3,10 +3,11 @@
 <center>
     <h1>Login</h1>
     <form action="" method="post">{% csrf_token %}
+    {% if form.errors %}<p style="color:#b24"><b>Username/Password not valid</b></p>{% endif %}
          {{ form.as_p }}
         <input type="submit">
     </form>
-    <p>forgot password? <a href="/password_reset/">click here</a></p>
+    <p>forgot password? <a href="/password_reset/" style="color:#444">click here</a></p>
 </center>
 {% endblock %}
 

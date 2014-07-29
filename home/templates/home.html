@@ -1,26 +1,42 @@
 {% extends 'base.html' %}
     {% block content %}
-
         {% for i in check %}
-            <div style="background-color:eee; margin:4px; min-height:100px; padding: 5px;">
-            <strong>{{ i }}</strong>
-            <a href="/view/group/{{ i }}/add/" class="btn btn-primary btn-xs" style="float:right;">Add a New Article</a><br>
-            {% if articles.count > 0 %}
-                {% for article in articles %}
-                    {% if i = article.group_id %}
-                        {% if user = article.Author_id %}
-                            {{ article.Title }}<br>
+            <div class="home-art" style="border-radius:5px;">
+                <div class="group">
+                    <strong><a href="/view/group/{{i}}" style="color:black;">{{ i }}</a></strong>
+                    <a href="/view/group/{{ i }}/add/" class="btn btn-primary btn-xs" style="float:right;">Add a New Article</a>
+
+
+                    <div class="article">
+                        <hr style="border-color: olive; margin-top:5px; margin-bottom: 5px;">
+                        {% if articles.count > 0 %}
+
+                            {% for article in articles reversed %}
+                                {% if i = article.group_id %}
+                                    {% if user = article.Author_id %}
+
+                                        <a href="/view/group/{{ i }}/show/{{ article.id }}/">{{ article.Title }}</a>
+                                        <div style="float:right">{{ article.art_date}}</div><br>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            None
                         {% endif %}
-                    {% endif %}
-                {% endfor %}
-            {% else %}
-                None
-            {% endif %}
-
+                    </div>
+                </div>
             </div>
-
         {% endfor %}
+        <script>
+            $(document).ready(function(){
+            $(".article").hide();
 
+            $(".group").on('click', function(){
+                $(this).children('.article').eq(0).slideToggle(200);
+            });
+
+            });
+        </script>
    {% endblock %}
     {% block nav %}
         {{ user.username }}

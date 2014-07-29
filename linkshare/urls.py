@@ -3,8 +3,7 @@ from django.contrib import admin
 from django.contrib.auth import views
 from dajaxice.core import dajaxice_autodiscover
 from django.conf import settings
-
-dajaxice_autodiscover()
+from django.conf.urls.static import static
 
 
 
@@ -48,5 +47,8 @@ urlpatterns = [
         'home.views.GetGroup'),
     url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/$', 'article.views.ShowGroup'),
     url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/unjoin/$', 'home.views.DeleteGroup'),
-    url(r'view/group/(?P<grp>[0-9A-Za-z_\-]+)/remove_article/(?P<art_id>[0-9A-Za-z_\-]+)', 'article.views.rem_art')
+    url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/remove_article/(?P<art_id>[0-9A-Za-z_\-]+)', 'article.views.rem_art'),
+    url(r'^view/yourpost/$', 'article.views.posted'),
+    url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/show/(?P<article_id>[0-9A-Za-z_\-]+)/edit$', 'article.views.edit_article'),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
 ]

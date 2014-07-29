@@ -33,6 +33,14 @@ class Signup(UserCreationForm):
         model = User
         fields= ('first_name','last_name','username','email','password1','password2')
 
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        try:
+                User.objects.get(username=username)
+        except User.DoesNotExist:
+                return username
+        raise forms.ValidationError("That username is already taken, please select another.")
+
 
 
     def save(self, commit=True):

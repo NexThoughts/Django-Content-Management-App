@@ -29,7 +29,7 @@ Testing Styles
 		This website has been developed by Nexthoughts Software Technology Private Limited.	
 	</div>
 	<div class="main"><center>
-		If you are a member : <a href="/accounts/login/" class="btn btn-primary btn-lg" role="button">Login</a> else : 
+		<a href="/accounts/login/" class="btn btn-primary btn-lg" role="button">Login</a>
 		<a href="/accounts/register/" class="btn btn-primary btn-lg" role="button">Register</a>
 	</center>	
 	</div>
@@ -55,13 +55,6 @@ Testing Styles
 		
 	</div>
 </div>
-<script src="{% static "assets/js/jquery-1.11.1.min.js" %}"></script>
-<script>
-$(document).ready(function(){
-  $("img").hide()
-  $("img").fadeIn(2000)
-});
-</script>
 </body>
 </html>
 

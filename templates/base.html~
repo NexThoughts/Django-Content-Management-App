@@ -7,8 +7,7 @@ Welcome
     <link rel="stylesheet" type="text/css" href=" {% static "assets/css/bootstrap.min.css" %}">
 
     <link rel="stylesheet" type="Text/CSS" href="{% static "assets/css/home.css" %}">
-	<script src="{% static "assets/js/jquery-1.11.1.min.js" %}"></script>
-    <script src="{% static "assets/js/bootstrap.min.js" %}"></script>
+
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -19,7 +18,7 @@ Welcome
 				 <span class= "icon-bar"></span>
 				
 		</button>
-		<a href="/" class="navbar-brand">Django Content Management App</a>
+		<a href="127.0.0.1:8000" class="navbar-brand">Django Content Management App</a> 
 		<div class="navbar-text">powered by</div>
 		<a href="http://www.nexthoughts.com" class="navbar-text" style="text-decoration: none;">Nexthoughts</a>
 
@@ -68,6 +67,5 @@ Welcome
 	</footer>
 
 </div>
-
 </body>
 </html>

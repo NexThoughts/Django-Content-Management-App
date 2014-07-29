@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response,get_object_or_404
 from forms import AddArticle,AddComments
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def UploadArticle(request, grp):
     if request.POST:
-        form = AddArticle(request.POST)
+        form = AddArticle(request.POST, request.FILES)
         if form.is_valid():
             check=form.save(commit=False)
             check.Author_id = request.user
@@ -56,6 +56,27 @@ def ShowGroup(request, grp, article_id=1):
     return render_to_response('MyGroup.html', {'parameter': parameter, 'articles': Article.objects.all(), 'grp':g })
 
 def rem_art(request, art_id, grp):
-    r=Article.objects.all(id=art_id)
+    r=Article.objects.get(id=art_id)
     r.delete()
     return HttpResponseRedirect("/home/")
+
+def posted(request):
+    art= Article.objects.all()
+    return render_to_response('posts.html', {'articles': art} )
+
+def edit_article(request, grp, article_id):
+    art=Article.objects.get(id=article_id)
+    if request.POST:
+        form = AddArticle(request.POST, instance=art)
+        if form.is_valid():
+            check=form.save(commit=False)
+            check.Author_id = request.user
+            check.group_id = Group.objects.get(name=grp)
+            check.save()
+            return HttpResponseRedirect('/home')
+        else:
+            form = AddArticle(instance=art)
+    args = {}
+    args.update(csrf(request))
+    args['form']=AddArticle(instance=art)
+    return render_to_response('edit.html', args)

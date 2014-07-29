@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<form name="addarticle" action="" method="POST">{% csrf_token %}
+<form name="addarticle" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
     <ul style="list-style:None;">
         <li>{{ form.Title }}</li>
         <li>{{ form.Body }}</li>
+        <li>{{ form.File }}</li>
     </ul>
     <input type="submit">
 </form>

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+        {% block content %}
+        <h2>Your Activities</h2>
+        {% for article in articles %}
+        {% if article.author_id = user %}
+            You posted an article titled "{{ article.Title }}" on '{{ article.group_id }}' at {{ article.art_date }}<br>
+
+        {% endif %}
+        {% endfor %}
+        {% endblock %}

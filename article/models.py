@@ -6,7 +6,7 @@ class Article(models.Model):
     Body = models.TextField()
     Link = models.CharField( max_length=200)
     File = models.FileField()
-    #pub_date = models.DateTimeField('date published')
+    art_date = models.DateTimeField(auto_now=True)
     group_id = models.ForeignKey(Group)
     Author_id = models.ForeignKey(User)
 
@@ -19,6 +19,6 @@ class Comments(models.Model):
     Comment = models.TextField(max_length=200)
     Group_id = models.ForeignKey(Group)
     Article_id = models.ForeignKey(Article)
-
+    com_date = models.DateTimeField(auto_now=True)
     def __unicode__(self):
         return self.Comment

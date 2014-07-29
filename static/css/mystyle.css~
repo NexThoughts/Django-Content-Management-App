@@ -1,0 +1,62 @@
+*{
+margin: 0px auto;
+padding: 0px;
+}
+
+body{
+background-color: #ccc;
+}
+
+.nt-body{
+background-color: #78d;
+width: 800px;
+min-height: 500px;
+margin-top:50px;
+border:solid;
+border-color:#fff;	 
+padding: 20px;
+}
+
+hr{
+margin-top:0px;
+margin-bottom:0px;
+}
+.main{
+background-color: #89e; 
+border: solid;
+border-color:#33d;
+border-width:thin;
+min-height:70px;
+margin-top:80px;
+padding:10px;
+color:white;
+}
+#brand{
+color:white;
+margin-left:100px;
+padding:5px;
+}
+#logo{
+float:left;
+}
+#content{
+color:white;
+margin-top:30px;
+text-align:center;
+}
+#left-contact{
+color:white;
+width:330px;
+font-size:small;
+margin-top:5px;
+margin-left:0px;
+padding:5px;
+}
+#right-contact{
+color:white;
+width:330px;
+font-size:small;
+margin-top:5px;
+padding:5px;
+float:right;
+}

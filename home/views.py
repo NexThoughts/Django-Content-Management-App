@@ -18,7 +18,8 @@ def homepage(request):
 def grp(request):
     l=request.user.groups.all().values_list('name', flat=True)
     u=request.user.id
-    return render_to_response('group.html',{'check' : l , 'user': u} )
+    n=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))
+    return render_to_response('group.html',{'check' : l , 'user': u, 'check2': n} )
 
 def groupall(request):
     l=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))

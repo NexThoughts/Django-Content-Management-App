@@ -1,18 +1,19 @@
 {% extends "index.html" %}
 {% block content %}
-<h1 align="center"> Register </h1>
+<h1 align="center" style="color:white"> Register </h1>
 <center>
 <form action="/accounts/register/" method="post">{% csrf_token %}
-{% if form.errors %}<p>form has errors</p>{% endif %}
-    <div  style="background-color:white;width:300px;padding:20px;border-radius:20px">
-        <label for ="first_name">First Name:</label><br>{{ form.first_name }}<br><br>
-        <label for ="last_name">Last Name:</label><br>{{ form.last_name }}<br><br>
-        <label for ="username">Username:</label><br>{{ form.username }}<br><br>
-        <label for ="email">Valid Email Id:</label><br>{{ form.email }}<br><br>
-        <label for ="Password1">Password:</label><br>{{ form.password1 }}<br><br>
-        <label for ="Password2">Confirm Password:</label><br>{{ form.password2 }}<br><br>
-    </div>
-    <center><input type="submit" value="Sign Up"></center>
+    <div  style="width:300px;padding:20px;border-radius:20px; border:solid;border-color:345d">
+        {% if form.errors %}<p style="color:#b24"><b>Form has errors</b></p>{% endif %}
+
+        <label for ="first_name">First Name:<div style="color:#c24;">{{ form.first_name.errors }}</div></label><br>{{ form.first_name }}<br><br>
+        <label for ="last_name">Last Name:<div style="color:#c24;">{{ form.last_.errors }}</div></label><br>{{ form.last_name }}<br><br>
+        <label for ="username">Username:<div style="color:#c24;">{{ form.username.errors }}</div></label><br>{{ form.username }}<br><br>
+        <label for ="email">Valid Email Id:<div style="color:#c24;">{{ form.email.errors }}</div></label><br>{{ form.email }}<br><br>
+        <label for ="Password1">Password:<div style="color:#c24;">{{ form.password1.errors }}</div></label><br>{{ form.password1 }}<br><br>
+        <label for ="Password2">Confirm Password:<div style="color:#c24;">{{ form.password1.errors }}</div></label><br>{{ form.password2 }}<br><br>
+    </div><br>
+    <center><input type="submit" value="Sign Up"></center><br>
 </form>
 </center>
 {% endblock %}

@@ -1,22 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div>
+Articles
+<a href="add/" style="float:right;">Add a New Article</a>
 
+    <hr style="margin:5px;">
+</div>
 {% if articles.count > 0 %}
-<h3> Articles </h3>
-<a href="add/">Add a New Article</a>
 {% for article in articles %}
-         {% if article.Author_id_id = parameter %}
+
          {% if article.group_id_id = grp %}
 <div id="art_cont">
-    <a href="/view/group/{{ article.group_id }}/remove_article/{{ article.id }}" class="btn btn-danger btn-xs" style="float:right;">X</a>
-    <font size="6"><a href="/view/group/{{ article.group_id }}/show/{{ article.id }}/">{{ article.Title }}</a></font>
+    {% if article.Author_id_id = parameter %}
+        <a href="/view/group/{{ article.group_id }}/remove_article/{{ article.id }}" class="btn btn-danger btn-xs" style="float:right;">X</a>
+    {% endif %}
+    <font size="4"><a href="/view/group/{{ article.group_id }}/show/{{ article.id }}/">{{ article.Title }}</a></font>
     <hr>
     <p>{{ article.Body|upper|truncatewords:"10" }}</p><!-- filters -->
     <p>{{ article.Link }}</p>
 
 </div>
-        {% endif %}
+
         {% endif %}
 {% endfor %}
 

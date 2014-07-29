@@ -7,6 +7,7 @@ from django.contrib.auth import views
 from django.core.mail import send_mail
 from django.core.mail.backends import smtp
 from forms import PasswordResetForm
+from django import forms
 
 
 from django.core.urlresolvers import reverse
@@ -30,16 +31,16 @@ def register_check(request):
         else:
             return render_to_response('register.html', {'form': form}, context_instance=RequestContext(request))
 
-    args = {}
-    args.update(csrf(request))
-
-    args['form']=Signup()
-    print args
-    return render_to_response('register.html', args)
+    #args = {}
+    #args.update(csrf(request))
+    #args['form']=Signup()
+    #print args
+    form = Signup()
+    context = {'form': form}
+    return render_to_response('register.html', context, context_instance=RequestContext(request))
 
 def register_success(request):
     return render_to_response('register_success.html')
-
 
 @csrf_protect
 def password_reset(request, is_admin_site=False,
