@@ -22,6 +22,8 @@ from django.contrib.auth.tokens import default_token_generator
 
 # Create your views here.
 def register_check(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/home/')
     if request.method == "POST":
         form = Signup(request.POST)
         if form.is_valid():

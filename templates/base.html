@@ -1,4 +1,5 @@
 {% load staticfiles %}
+<!DOCTYPE html>
 <html>
 <head>
 <Title>
@@ -10,7 +11,7 @@ Welcome
 	<script src="{% static "assets/js/jquery-1.11.1.min.js" %}"></script>
     <script src="{% static "assets/js/bootstrap.min.js" %}"></script>
 </head>
-<body>
+<body background="{% static "assets/images/Wall2.gif" %}">
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="Container-fluid">
 			<button type="button" class="navbar-toggle" data-toggle= "collapse" data-target=".navHeaderCollapse">
@@ -19,18 +20,15 @@ Welcome
 				 <span class= "icon-bar"></span>
 				
 		</button>
-		<a href="/" class="navbar-brand">Django Content Management App</a>
-		<div class="navbar-text">powered by</div>
-		<a href="http://www.nexthoughts.com" class="navbar-text" style="text-decoration: none;">Nexthoughts</a>
+		<a href="/" class="navbar-brand">Django Content Management App <font size="1">powered by</font><font size="3"> Nexthoughts</font></a>
 
 		<div class="collapse navbar-collapse navHeaderCollapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li class="active"><a href="/home">Home</a></li>
+				<li><a href="/home">Home</a></li>
 				<li><a href="/view/group">Join Group</a></li>
-				<li><a href="/view/yourpost">Posts</a></li>
-				<li><a href="/logout">Logout</a></li>
+                <li><a href="/logout">Logout</a></li>
 			</ul>
-		<div class="navbar-text navbar-right">{% block nav %}{% endblock %} &nbsp;</div>
+		<div class="navbar-text navbar-right">{{ user.username }} &nbsp;</div>
 
 		</div>
 
@@ -41,33 +39,61 @@ Welcome
 <div id="main">
 	
 	<div id="Left-Sidebar">
-	l sidebar<br>
-
 	    {% block left-content %}
-           <font size="-2"> <b> {{ user.first_name }}&nbsp;{{ user.last_name }} </b> </font>
+
+           <b> {{ user.first_name }}&nbsp;{{ user.last_name }} </b>
+
+        <hr>
         {% endblock %}
     </div>
 	<div id="Right-Sidebar">
-	r sidebar
     {% block right-content %}
-        {% for i in nongrp %}
-            <br>{{ check|random }}
+        {% if nongrp.count > 0 %}
+            <p style="margin-top:20px;"><b>Join:</b></p>
+        <hr style="margin-top:0px;">
+        {% for i in nongrp reversed %}
+        <div style="margin-top:10px;background-color:#339; color:white; padding-top:5px;padding-bottom:5px; border-radius:3px;">
+            <center><a name="join" href="/view/get/{{ i }}">{{ i }}</a></center>
+        </div>
         {% endfor %}
+    {% endif %}
     {% endblock %}
     </div>
 
 	<div id="content">
-	content
         {% block content %}
         <hr>
         {% endblock %}
 	</div>
 
-	<footer>
-	footer
-	</footer>
+
 
 </div>
+
+<footer>
+<div class="contactus">
+
+        <div id="right-contact">
+		<b>Reach us at:</b>
+		<hr style="border-color:#000;margin:0px;">
+		<a href="mailto:contact@nexthoughts.com" id="contactlink">contact@nexthoughts.com</a><br>
+		<a href="http://www.nexthoughts.com" id="contactlink">http://www.nexthoughts.com</a><br>
+		</div>
+
+		<div id="left-contact">
+
+		<b>Contact</b>
+		<hr style="border-color:#000;margin:0px;">
+		<b>Nexthoughts Software Technologies Pvt Ltd</b><br>
+		4, Science & Technology Entrepreneur's Park,<br>
+		C- 20/1, JSSATE, Sector 62, Noida - 201301, U.P.<br>
+
+		</div>
+		<center><img src="{% static "assets/images/logo2.png" %}" style="margin-top:20px;"></center>
+
+	</div>
+</footer>
+
 
 </body>
 </html>

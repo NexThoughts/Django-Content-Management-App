@@ -42,13 +42,11 @@ urlpatterns = [
     url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/all/','article.views.articles'),
     url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/show/(?P<article_id>[0-9A-Za-z_\-]+)/$', 'article.views.article'),
     url(r'^view/group/$', 'home.views.grp'),
-    url(r'^view/group/all','home.views.groupall'),
     url(r'^view/get/(?P<join>[0-9A-Za-z_\-]+)/$',
         'home.views.GetGroup'),
     url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/$', 'article.views.ShowGroup'),
     url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/unjoin/$', 'home.views.DeleteGroup'),
     url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/remove_article/(?P<art_id>[0-9A-Za-z_\-]+)', 'article.views.rem_art'),
-    url(r'^view/yourpost/$', 'article.views.posted'),
     url(r'^view/group/(?P<grp>[0-9A-Za-z_\-]+)/show/(?P<article_id>[0-9A-Za-z_\-]+)/edit$', 'article.views.edit_article'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
 ]

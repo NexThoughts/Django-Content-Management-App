@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block content %}
-    <h3>Groups You've Joined</h3>
+    {% block content %}
+    <h3 style="color:green">Groups You've Joined:</h3>
         {% for i in check %}
 
 
-        <div id="cont_grp">{{ i }}
+        <div id="cont_grp" style="color:teal"><b>{{ i }}</b>
             <a href="{{ i}}/unjoin" class="btn btn-danger btn-xs" style="float:right; margin-right: 2px;">
                 Unjoin
             </a>
@@ -18,23 +18,20 @@
 
         {% block content-sub %}
 
-        {% if check2.count != '' %}
-            <hr>
-            <h3>You can also Join:</h3>
-        {% endif %}
-        {% for i in check2 %}
+            {% if check2.count < 1 %}
+                <hr>
+            {% else %}
+                <hr style="border-color:black;">
+                <h3 style="color:red">You can also Join:</h3>
+            {% endif %}
+            {% for i in check2 %}
+                <div id="cont_grp" style="color:indigo; background-color:#99f"><b>{{ i }}</b>
 
-
-        <div id="cont_grp">{{ i }}
-
-            <a name="join" href="/view/get/{{ i }}" class="btn btn-primary btn-xs" style="float:right;" >
-                Join Group
-            </a>
-        </div>
-
-
-        {% endfor %}
+                    <a name="join" href="/view/get/{{ i }}" class="btn btn-primary btn-xs" style="float:right;" >
+                        Join Group
+                    </a>
+                </div>
+            {% endfor %}
 
         {% endblock %}
-
-{% endblock %}
+    {% endblock %}

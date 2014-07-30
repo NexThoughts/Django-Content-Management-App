@@ -1,17 +1,30 @@
 from django import forms
 from models import Article, Comments
-from django.forms import Textarea
+
 class AddArticle(forms.ModelForm):
 
-
-    Link = forms.CharField(required=False)
     File = forms.FileField(required=False)
-    #pub_date=forms.DateTimeField(required=False)
     group_id = forms.CharField(required=False)
     Author_id = forms.CharField(required=False)
+
     class Meta:
         model = Article
-        fields = ('Title', 'Body', 'Link','File','group_id','Author_id')
+        fields = ('Title', 'Body','File','group_id','Author_id')
+
+    def clean_Title(self):
+        Title = self.cleaned_data['Title']
+        if (Title == ''):
+            raise forms.ValidationError("Cannot Be Blank")
+        else:
+            return Title
+    def clean_Body(self):
+        Body = self.cleaned_data['Body']
+        if (Body == ''):
+            raise forms.ValidationError("Cannot Be Blank")
+        else:
+            return Body
+
+
 
 class AddComments(forms.ModelForm):
     class Meta:

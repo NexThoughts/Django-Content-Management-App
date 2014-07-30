@@ -47,12 +47,10 @@ class Signup(UserCreationForm):
         user = super(UserCreationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
         user.set_password(self.cleaned_data['password1'])
-        user.is_active = False
-        g=Group.objects.get(name='Django')
+        user.is_active = True
 
         if commit:
             user.save()
-            g.user_set.add(user)
         return user
 
 class PasswordResetForm(forms.Form):

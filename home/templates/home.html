@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
     {% block content %}
+<h3 style="margin-top:5px;">Welcome, {{ user.first_name }}</h3>
+<hr>
         {% for i in check %}
             <div class="home-art" style="border-radius:5px;">
                 <div class="group">
@@ -11,12 +13,12 @@
                         <hr style="border-color: olive; margin-top:5px; margin-bottom: 5px;">
                         {% if articles.count > 0 %}
 
-                            {% for article in articles reversed %}
+                            {% for article in articles %}
                                 {% if i = article.group_id %}
                                     {% if user = article.Author_id %}
 
                                         <a href="/view/group/{{ i }}/show/{{ article.id }}/">{{ article.Title }}</a>
-                                        <div style="float:right">{{ article.art_date}}</div><br>
+                                        <div style="float:right">{{ article.art_date|timesince }} ago</div><br>
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
@@ -30,7 +32,6 @@
         <script>
             $(document).ready(function(){
             $(".article").hide();
-
             $(".group").on('click', function(){
                 $(this).children('.article').eq(0).slideToggle(200);
             });
@@ -38,6 +39,3 @@
             });
         </script>
    {% endblock %}
-    {% block nav %}
-        {{ user.username }}
-    {% endblock %}

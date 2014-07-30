@@ -116,3 +116,11 @@ LOGIN_REDIRECTED_URL = '/home/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+MAX_UPLOAD_SIZE = "42880"
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+
+    'django.contrib.auth.context_processors.auth',
+ )

@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
         {% block content %}
         <form action="" method="post">{% csrf_token %}
-            {{ form.Title }}<br>
-            {{ form.Body }}<br>
-            <input type="submit">
+            <center><ul style="list-style:None;">
+                <li><label for="Title">Title:&nbsp; </label>{{ form.Title }}{{ form.Title.errors }}</li>
+                <li><label for="Body">Body: </label>{{ form.Body }}{{ form.Body.errors }}</li>
+                <li><label for="File">File: </label>{{ form.File }}{{ form.File.errors }}</li>
+            </ul>
+        <input type="submit">
+        </center>
         </form>
 
 

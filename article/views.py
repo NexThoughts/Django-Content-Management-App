@@ -5,7 +5,10 @@ from django.core.context_processors import csrf
 from article.models import Article,Comments
 from django.contrib.auth.models import User,Group
 from django.contrib.auth.decorators import login_required
+from django.template.defaultfilters import linebreaks_filter
 # Create your views here.
+
+@login_required
 def UploadArticle(request, grp):
     if request.POST:
         form = AddArticle(request.POST, request.FILES)
@@ -14,15 +17,18 @@ def UploadArticle(request, grp):
             check.Author_id = request.user
             check.group_id = Group.objects.get(name=grp)
             check.save()
-            return HttpResponseRedirect('/articles/all')
+            return HttpResponseRedirect('/view/group/'+grp)
         else:
             form = AddArticle()
 
     args = {}
     args.update(csrf(request))
     args['form']=AddArticle()
+    args['user']=request.user
+    args['nongrp']=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))
     return render_to_response('add.html', args)
 
+@login_required
 def article(request, grp, article_id=1):
     if request.POST:
         form = AddComments(request.POST)
@@ -42,41 +48,46 @@ def article(request, grp, article_id=1):
         args['article']= Article.objects.get(id=article_id)
         args['comment']= Comments.objects.all()
         args['user']=request.user
+        args['nongrp']=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))
         return render_to_response('view.html', args)
 
+@login_required
 def articles(request, grp):
-    return render_to_response('articles.html', { 'articles' : Article.objects.all(), 'grp':grp })
-
-
+    return render_to_response('articles.html', { 'articles' : Article.objects.all(), 'grp':grp, 'user':request.user })
 
 @login_required()
 def ShowGroup(request, grp, article_id=1):
-    parameter = request.user.id
+    parameter = request.user
     g=Group.objects.get(name=grp).id
-    return render_to_response('MyGroup.html', {'parameter': parameter, 'articles': Article.objects.all(), 'grp':g })
+    return render_to_response('MyGroup.html', {'parameter': parameter.id, 'articles': Article.objects.all(), 'grp':g ,'user':parameter, 'nongrp' : Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))})
 
+@login_required
 def rem_art(request, art_id, grp):
     r=Article.objects.get(id=art_id)
-    r.delete()
-    return HttpResponseRedirect("/home/")
+    if request.user == r.Author_id:
+        r.delete()
+    return HttpResponseRedirect("/view/group/"+grp)
 
-def posted(request):
-    art= Article.objects.all()
-    return render_to_response('posts.html', {'articles': art} )
-
+@login_required
 def edit_article(request, grp, article_id):
     art=Article.objects.get(id=article_id)
-    if request.POST:
-        form = AddArticle(request.POST, instance=art)
-        if form.is_valid():
-            check=form.save(commit=False)
-            check.Author_id = request.user
-            check.group_id = Group.objects.get(name=grp)
-            check.save()
-            return HttpResponseRedirect('/home')
-        else:
-            form = AddArticle(instance=art)
-    args = {}
-    args.update(csrf(request))
-    args['form']=AddArticle(instance=art)
-    return render_to_response('edit.html', args)
+    if request.user == art.Author_id:
+        if request.POST:
+            form = AddArticle(request.POST, request.FILES, instance=art)
+            if form.is_valid():
+                check=form.save(commit=False)
+                check.Author_id = request.user
+                check.group_id = Group.objects.get(name=grp)
+                check.File = ''
+                check.save()
+                return HttpResponseRedirect('/home')
+            else:
+                form = AddArticle(instance=art)
+        args = {}
+        args.update(csrf(request))
+        args['form']=AddArticle(instance=art)
+        args['user']=request.user
+        args['nongrp']=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))
+        return render_to_response('edit.html', args)
+    else:
+        return HttpResponseRedirect('/home/')

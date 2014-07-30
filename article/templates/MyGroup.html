@@ -8,17 +8,17 @@ Articles
     <hr style="margin:5px;">
 </div>
 {% if articles.count > 0 %}
-{% for article in articles %}
+{% for article in articles reversed %}
 
          {% if article.group_id_id = grp %}
 <div id="art_cont">
     {% if article.Author_id_id = parameter %}
         <a href="/view/group/{{ article.group_id }}/remove_article/{{ article.id }}" class="btn btn-danger btn-xs" style="float:right;">X</a>
     {% endif %}
-    <font size="4"><a href="/view/group/{{ article.group_id }}/show/{{ article.id }}/">{{ article.Title }}</a></font>
+    <font size="4"><a href="/view/group/{{ article.group_id }}/show/{{ article.id }}/">"{{ article.Title }}"</a></font>
+    <font size="2">-{{ article.Author_id }}</font><div style="float:right"><font size="1">{{ article.art_date|timesince }} ago &nbsp;&nbsp;&nbsp;</font></div>
     <hr>
-    <p>{{ article.Body|upper|truncatewords:"10" }}</p><!-- filters -->
-    <p>{{ article.Link }}</p>
+    <p><font size="2">{{ article.Body|upper|truncatewords:"10" }}</font></p><!-- filters -->
 
 </div>
 

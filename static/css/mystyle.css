@@ -1,17 +1,18 @@
+{% load staticfiles %}
 *{
 margin: 0px auto;
 padding: 0px;
 }
 
 body{
-background-color: #ccc;
+background-attachment:fixed;
 }
 
 .nt-body{
-background-color: #78d;
+background-color: #56b;
 width: 800px;
 min-height: 500px;
-margin-top:50px;
+margin-top:25px;
 border:solid;
 border-color:#fff;	 
 padding: 20px;
