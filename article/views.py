@@ -25,7 +25,8 @@ def UploadArticle(request, grp):
     args.update(csrf(request))
     args['form']=AddArticle()
     args['user']=request.user
-    args['nongrp']=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))
+    args['nongrp']=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True)).reverse()[:8]
+    args['num']=Article.objects.filter(Author_id_id=request.user.id)
     return render_to_response('add.html', args)
 
 @login_required
@@ -41,15 +42,16 @@ def article(request, grp, article_id=1):
             return HttpResponseRedirect('')
         else:
             form = AddComments()
-    else:
-        args = {}
-        args.update(csrf(request))
-        args['form']=AddComments()
-        args['article']= Article.objects.get(id=article_id)
-        args['comment']= Comments.objects.all()
-        args['user']=request.user
-        args['nongrp']=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))
-        return render_to_response('view.html', args)
+
+    args = {}
+    args.update(csrf(request))
+    args['form']=AddComments()
+    args['article']= Article.objects.get(id=article_id)
+    args['comment']= Comments.objects.all()
+    args['user']=request.user
+    args['nongrp']=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))
+    args['num']=Article.objects.filter(Author_id_id=request.user.id)
+    return render_to_response('view.html', args)
 
 @login_required
 def articles(request, grp):
@@ -59,7 +61,7 @@ def articles(request, grp):
 def ShowGroup(request, grp, article_id=1):
     parameter = request.user
     g=Group.objects.get(name=grp).id
-    return render_to_response('MyGroup.html', {'parameter': parameter.id, 'articles': Article.objects.all(), 'grp':g ,'user':parameter, 'nongrp' : Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))})
+    return render_to_response('MyGroup.html', {'parameter': parameter.id, 'articles': Article.objects.all(), 'grp':g ,'user':parameter,'num': Article.objects.filter(Author_id_id=request.user.id), 'nongrp' : Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True)).reverse()[:8] })
 
 @login_required
 def rem_art(request, art_id, grp):
@@ -87,7 +89,8 @@ def edit_article(request, grp, article_id):
         args.update(csrf(request))
         args['form']=AddArticle(instance=art)
         args['user']=request.user
-        args['nongrp']=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))
+        args['nongrp']=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True)).reverse()[:8]
+        args['num']=Article.objects.filter(Author_id_id=request.user.id)
         return render_to_response('edit.html', args)
     else:
         return HttpResponseRedirect('/home/')

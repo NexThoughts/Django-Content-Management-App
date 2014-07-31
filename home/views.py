@@ -11,14 +11,17 @@ def homepage(request):
         c=request.user.groups.all()
         u=request.user
         n=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))
-        return render_to_response('home.html',{'check' : c , 'user': u, 'nongrp': n, 'articles': Article.objects.order_by('art_date').reverse()[:5] })
+        r=Article.objects.filter(Author_id_id=u.id)
+        return render_to_response('home.html',{'check' : c , 'user': u, 'nongrp': n, 'articles': Article.objects.order_by('art_date').reverse()[:5], 'num': r })
     return HttpResponseRedirect('/accounts/login')
 @login_required
 def grp(request):
     l=request.user.groups.all().values_list('name', flat=True)
     u=request.user
     n=Group.objects.exclude(id__in=request.user.groups.all().values_list('id', flat=True))
-    return render_to_response('group.html',{'check' : l , 'user': u, 'check2': n, 'nongrp': n} )
+
+    r=Article.objects.filter(Author_id_id=u.id)
+    return render_to_response('group.html',{'check' : l , 'user': u, 'check2': n, 'nongrp': n.reverse()[:8], 'num':r })
 @login_required
 def GetGroup(request, join):
     g = Group.objects.get(name=join)

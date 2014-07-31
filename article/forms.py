@@ -27,9 +27,18 @@ class AddArticle(forms.ModelForm):
 
 
 class AddComments(forms.ModelForm):
+
+    def clean_comment(self):
+        Comment = self.cleaned_data['Comment']
+        if (Comment == ''):
+            raise forms.ValidationError("Cannot Be Blank")
+        else:
+            return Comment
+
     class Meta:
         model = Comments
         fields = ('Comment',)
         widgets = {
-          'Comment': forms.Textarea(attrs={'rows':2, 'cols':30,'placeholder': "Add a Comment"}),
+          'Comment': forms.Textarea(attrs={'rows':2, 'cols':50,'placeholder': "Add a Comment",'required':'true' }),
         }
+

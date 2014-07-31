@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+<div id="hello" style="border:solid;border-width:thin;border-color:black;padding:10px;border-radius:3px;min-height:200px;">
 <h1 style="color:olive">{{ article.Title }}<a href="edit" class="btn btn-info btn-xs" style="float:right;">Edit</a></h1>
 <hr style="margin-top:0px">
 
-<br>
  {% if article.File != '' %}
     <script>
         $(document).ready(function(){
@@ -13,6 +13,7 @@
                 var img,a,b,c,d;
                 img = $('<img>');
                 img.attr('src', $str);
+                img.attr('alt', "Image is unavailable");
                 img.attr('style', 'border:dotted;border-width:thin;padding:20px;');
                 img.appendTo('#imagediv');
                 a = img.height();
@@ -43,12 +44,13 @@
  {% endif %}
     <center>
     <div id="imagediv">
-
+        <br>
     </div>
     </center>
 
-        <br>
-<p>{{ article.Body|urlize|linebreaks }}<p>
+<div style="padding-left:10px;">
+<p>{{ article.Body|urlize|linebreaks }}</p>
+</div>
     <br>
         <hr>
     {% if article.File != '' %}
@@ -59,16 +61,17 @@
     <a href="{{ article.File.url }}" class="btn btn-xs" style="background-color:#339; color:white">Save</a>
     <hr>
 {% endif %}
-
+</div>
+        <div id="com" style="margin-top:20px;">
 <form action="" method="POST">{% csrf_token %}
-{{ form.Comment }}<br>
-    <input type="submit" value="Post" class="btn btn-info btn-xs">
+<div style="margin-left:10px">{{ form.Comment.errors }}{{ form.Comment }}</div><br>
+    <input type="submit" value="Post" class="btn btn-info btn-xs" style="margin-left:10px;">
 </form>
 <br>
 {% for value in comment reversed %}
     {% if value.Article_id_id = article.id %}
     <div id="comment_cont">
-        <b>{{ value.User_id }}, {{ value.com_date }}</b>
+        <b>{{ value.User_id }}</b>, <font size="2">{{ value.com_date|timesince }} ago</font>
 
         {% if value.User_id = user %}
             <a href="#" class="btn btn-danger btn-xs" style="float:right;">x</a>
@@ -77,9 +80,10 @@
                 <a href="#" class="btn btn-danger btn-xs" style="float:right;">X</a>
             {% endif %}
         {% endif %}
-        <hr>
+        <hr style="margin-top:10px;margin-bottom:10px;">
         {{ value }}
     </div>
     {% endif %}
+</div>
 {% endfor %}
 {% endblock %}

@@ -41,6 +41,13 @@ class Signup(UserCreationForm):
                 return username
         raise forms.ValidationError("That username is already taken, please select another.")
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        try:
+            User.objects.get(email=email)
+        except email != User.objects.get(email=email):
+            return email
+        raise forms.ValidationError('Email Id Exists, Choose another')
 
 
     def save(self, commit=True):

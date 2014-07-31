@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>
-Testing Styles
+Welcome
 </title>
 <link rel="stylesheet" type="text/css" href=" {% static "assets/css/bootstrap.css" %}">
 <link rel="stylesheet" type="text/css" href="{% static "assets/css/mystyle.css" %}">
@@ -10,11 +10,12 @@ Testing Styles
 </head>
 <body background="{% static "assets/images/Wall2.gif" %}">
 <div class="nt-body">
+
 	<div id="logo">
-		<img src="{% static "assets/images/logo.png" %}" height="70" width="90">
+		<a href="/" style="text-decoration:none;"><img src="{% static "assets/images/logo.png" %}" height="70" width="90"></a>
 	</div>
 	<div id="brand">
-		<h1>Django-Content-Management-App</h1>
+		<h1><a href="/" style="text-decoration:none; color:white;">Django-Content-Management-App</a></h1>
 	</div>
 	<hr>
 	<br><br>
@@ -39,8 +40,8 @@ Testing Styles
 		<div id="right-contact">
 		Reach us at:
 		<hr style="border-color:#fff">
-		contact@nexthoughts.com<br>
-		http://www.nexthoughts.com<br>
+		<a href="mailto:contact@nexthoughts.com" style="text-decoration:none;color:white;">contact@nexthoughts.com</a><br>
+		<a href="http://www.nexthoughts.com" style="text-decoration:none;color:white;">http://www.nexthoughts.com</a><br>
 		</div>		
 
 		<div id="left-contact">
@@ -55,6 +56,7 @@ Testing Styles
 		
 	</div>
 </div>
+
 <script src="{% static "assets/js/jquery-1.11.1.min.js" %}"></script>
 <script>
 $(document).ready(function(){
@@ -62,6 +64,7 @@ $(document).ready(function(){
   $("img").fadeIn(2000)
 });
 </script>
+
 </body>
 </html>
 
